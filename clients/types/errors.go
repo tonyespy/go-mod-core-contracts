@@ -42,3 +42,9 @@ func NewErrServiceClient(statusCode int, body []byte) error {
 func (e ErrServiceClient) Error() string {
 	return fmt.Sprintf("%d - %s", e.StatusCode, e.bodyBytes)
 }
+
+// Status returns the HTTP status code associated with the
+// ErrServiceClient instance.
+func (e ErrServiceClient) Status() int {
+	return e.StatusCode
+}
