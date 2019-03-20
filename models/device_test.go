@@ -30,7 +30,7 @@ var TestLocation = "{40lat;45long}"
 var TestProtocols = newTestProtocols()
 var TestDevice = Device{DescribedObject: TestDescribedObject, Name: TestDeviceName, AdminState: "UNLOCKED", OperatingState: "ENABLED",
 	Protocols: TestProtocols, LastReported: TestLastReported, LastConnected: TestLastConnected,
-	Labels: TestLabels, Location: TestLocation, Service: TestDeviceService, Profile: TestProfile, AutoEvents: newAutoEvent()}
+	Labels: TestLabels, Location: TestLocation, Service: TestDeviceService, AutoEvents: newAutoEvent()}
 
 func TestDevice_MarshalJSON(t *testing.T) {
 	marshaled := TestDevice.String()
@@ -79,7 +79,6 @@ func TestDevice_String(t *testing.T) {
 				",\"labels\":" + fmt.Sprint(string(labelSlice)) +
 				",\"location\":\"" + TestLocation + "\"" +
 				",\"service\":" + TestDevice.Service.String() +
-				",\"profile\":" + TestDevice.Profile.String() +
 				",\"autoEvents\":[" + TestAutoEvent.String() + "]" +
 				"}"},
 	}
@@ -92,27 +91,8 @@ func TestDevice_String(t *testing.T) {
 	}
 }
 
-func TestDevice_AllAssociatedValueDescriptors(t *testing.T) {
-	var assocVD []string
-	type args struct {
-		vdNames *[]string
-	}
-	tests := []struct {
-		name string
-		d    *Device
-		args args
-	}{
-		{"get associated value descriptors", &TestDevice, args{vdNames: &assocVD}},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			tt.d.AllAssociatedValueDescriptors(tt.args.vdNames)
-			if len(*tt.args.vdNames) != 2 {
-				t.Error("Associated value descriptor size > than expected")
-			}
-		})
-	}
-}
+// This test probably needs to be moved to edgex-go; see comments in device.go
+// func TestDevice_AllAssociatedValueDescriptors(t *testing.T) {
 
 func newTestProtocols() map[string]ProtocolProperties {
 	p1 := make(ProtocolProperties)

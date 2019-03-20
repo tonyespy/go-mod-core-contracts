@@ -101,7 +101,11 @@ func CommandResponseFromDevice(d Device, cmdURL string) CommandResponse {
 		LastReported:   d.LastReported,
 		Labels:         d.Labels,
 		Location:       d.Location,
-		Commands:       d.Profile.Commands,
+
+		// This function should probably move into Core Data, and will
+		// need to be re-worked slightly to read the commands directly
+		// from the device profile in Core Metadata.
+//		Commands:       d.Profile.Commands,
 	}
 
 	basePath := fmt.Sprintf("%s%s/%s/command/", cmdURL, clients.ApiDeviceRoute, d.Id)

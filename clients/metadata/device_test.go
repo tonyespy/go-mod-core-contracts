@@ -37,7 +37,7 @@ func TestAddDevice(t *testing.T) {
 		AdminState:     "UNLOCKED",
 		Name:           "Test name for device",
 		OperatingState: "ENABLED",
-		Profile:        models.DeviceProfile{},
+//		Profile:        models.DeviceProfile{},
 		Service:        models.DeviceService{},
 	}
 
